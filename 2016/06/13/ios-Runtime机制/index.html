@@ -13,17 +13,21 @@
   
   
   
-  <title>孤狼</title>
+  <title>ios-Runtime机制 | 孤狼</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="LJ">
-<meta property="og:type" content="website">
-<meta property="og:title" content="孤狼">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Objective-C语言是一门动态语言，它将很多静态语言在编译和链接时期做的事放到了运行时来处理。这种动态语言的优势在于：我们写代码时更具灵活性，如我们可以把消息转发给我们想要的对象，或者随意交换一个方法的实现等。
+这种特性意味着Objective-C不仅需要一个编译器，还需要一个运行时系统来执行编译的代码。对于Objective-C来说，这个运行时系统就像一个操作系统一样：它让所有的工作可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ios-Runtime机制">
+<meta property="og:url" content="http://yoursite.com/2016/06/13/ios-Runtime机制/index.html">
 <meta property="og:site_name" content="孤狼">
-<meta property="og:description" content="LJ">
+<meta property="og:description" content="Objective-C语言是一门动态语言，它将很多静态语言在编译和链接时期做的事放到了运行时来处理。这种动态语言的优势在于：我们写代码时更具灵活性，如我们可以把消息转发给我们想要的对象，或者随意交换一个方法的实现等。
+这种特性意味着Objective-C不仅需要一个编译器，还需要一个运行时系统来执行编译的代码。对于Objective-C来说，这个运行时系统就像一个操作系统一样：它让所有的工作可以">
+<meta property="og:updated_time" content="2016-06-13T13:02:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="孤狼">
-<meta name="twitter:description" content="LJ">
+<meta name="twitter:title" content="ios-Runtime机制">
+<meta name="twitter:description" content="Objective-C语言是一门动态语言，它将很多静态语言在编译和链接时期做的事放到了运行时来处理。这种动态语言的优势在于：我们写代码时更具灵活性，如我们可以把消息转发给我们想要的对象，或者随意交换一个方法的实现等。
+这种特性意味着Objective-C不仅需要一个编译器，还需要一个运行时系统来执行编译的代码。对于Objective-C来说，这个运行时系统就像一个操作系统一样：它让所有的工作可以">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -64,17 +68,15 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
-  
-    <article id="post-ios-Runtime机制" class="post-ios-Runtime机制 post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-ios-Runtime机制" class="post-ios-Runtime机制 post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
         
         
   
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/06/13/ios-Runtime机制/">ios-Runtime机制</a>
+    <h1 class="entry-title article-title">
+      ios-Runtime机制
     </h1>
   
 
@@ -545,74 +547,20 @@
 </article>
 
 
-
-
-
-
-  
-    <article id="post-ios页面跳转机制" class="post-ios页面跳转机制 post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2015/06/16/ios页面跳转机制/">ios页面跳转机制</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2015/06/16/ios页面跳转机制/" data-id="cipe151dl0000hls6gww3viqp" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p><span></span></p>
-<p>常用的就两种 一种通过导航，一种直接跳</p>
-<p>第一种 直接跳转 思路大致就是new一个目的页面，然后设置下页面跳转动画 中间还可以做点目的页面的数据初始化:</p>
-<p>ValueInputView *valueView = [[ValueInputView alloc] initWithNibName:@”ValueInputView”bundle:[NSBundle mainBundle]];</p>
-<p>valueView.delegate = self;</p>
-<p>[valueView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];</p>
-<p>[self presentModalViewController:valueView animated:YES];</p>
-<p>//返回 </p>
-<p>[self dismissModalViewControllerAnimated:YES];</p>
-<p>第二:</p>
-<p>利用UINavigationController，调用pushViewController，进行跳转；这种采用压栈和出栈的方式，进行Controller的管理。调用popViewControllerAnimated方法可以返回</p>
-<p>PickImageViewController *ickImageViewController = [[PickImageViewController alloc] init]; </p>
-<p>[self.navigationController pushViewController: ickImageViewController animated:true]; </p>
-<p>四种setModalTransitionStyle风格</p>
-<p>UIModalTransitionStyleCoverVertical 从底部滑入<br>UIModalTransitionStyleFlipHorizontal,水平翻转进入<br>UIModalTransitionStyleCrossDissolve,交叉溶解<br>UIModalTransitionStylePartialCurl,翻页</p>
-<p>场景切换</p>
-<p>多个场景之间切换的样式(Style)总共有5个：<br>Modal(模态) – 过渡到另一个场景，以完成一项任务。任务完成后，将关闭该场景，并返回到原来的场景。<br>Push(压入) – 创建一个场景链，用户可在其中前后移动。用于导航视图控制器。<br>Replace(替换，仅适用于iPad) – 替换当前场景，用于一些iPad特有的视图控制器。<br>Popover(弹出框，仅适用于iPad) – 一个带箭头的弹出框。<br>Custome(自定义) – 通过编译在场景之间进行自定义过渡。</p>
-<p>过渡类型(Transition)是从一个场景切换到另一个场景时播放的动画。有4个选项：<br>Cover Vertical – 新场景从下向上移动，逐渐覆盖旧场景。<br>Flip Horizontal – 视图水平翻转，以显示背面的新场景。<br>Cross Dissolve – 旧场景淡出，新场景淡入。<br>Partial Curl – 旧场景像书页一样翻开，显示下面的新场景。</p>
-<p>在iPad应用程序中，还会多出一个Presentation属性，它决定了模态视图在屏幕上的显示方式。有4种显示样式：<br>Form Sheet(表单) – 将场景调整到比屏幕小(不管朝向)，并在当前场景后面显示原始场景，这几乎相当于在一个iPad窗口中显示。<br>Page Sheet(页面) – 调整场景大小，使其以纵向格式显示。<br>Full Screen(全屏) – 调整场景大小，使其覆盖整个屏幕。<br>Current Context(当前上下文) – 以原始场景的显示方式展示场景。</p>
-<p></p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2015/06/16/ios页面跳转机制/">
-    <time datetime="2015-06-16T12:02:52.000Z" class="entry-date">
-        2015-06-16
-    </time>
-</a>
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-    </footer>
-</article>
+        <span class="nav-next"><a href="/2015/06/16/ios页面跳转机制/" rel="next">ios页面跳转机制 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
 
 
 
 
 
 
-  
-  
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
