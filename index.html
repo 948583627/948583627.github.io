@@ -13,16 +13,16 @@
   
   
   
-  <title>孤狼de技术博客</title>
+  <title>孤狼的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="LJ">
 <meta property="og:type" content="website">
-<meta property="og:title" content="孤狼de技术博客">
+<meta property="og:title" content="孤狼的技术博客">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="孤狼de技术博客">
+<meta property="og:site_name" content="孤狼的技术博客">
 <meta property="og:description" content="LJ">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="孤狼de技术博客">
+<meta name="twitter:title" content="孤狼的技术博客">
 <meta name="twitter:description" content="LJ">
   
   
@@ -40,7 +40,7 @@
       <header id="masthead" class="site-header" role="banner">
     <hgroup>
       <h1 class="site-title">
-        <a href="/" title="孤狼de技术博客" rel="home">孤狼de技术博客</a>
+        <a href="/" title="孤狼的技术博客" rel="home">孤狼的技术博客</a>
       </h1>
       
         <h2 class="site-description">
@@ -81,7 +81,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/02/13/ios-xmpp协议/" data-id="cipgebsbu0003i5s60b1fowin" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/02/13/ios-xmpp协议/" data-id="cipj9appq0007ens6lpzs123e" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -258,6 +258,69 @@
 
 
   
+    <article id="post-ios-加密方式" class="post-ios-加密方式 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2015/11/17/ios-加密方式/">ios-加密方式</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2015/11/17/ios-加密方式/" data-id="cipj9apj00000ens6t2ir662i" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p><span></span></p>
+<p>MD5 iOS代码加密<br>创建MD5类，代码如下</p>
+<p>#import <foundation foundation.h=""><br>@interface CJMD5 : NSObject<br>+(NSString <em>)md5HexDigest:(NSString </em>)input;<br>@end</foundation></p>
+<p>#import “CJMD5.h”</p>
+<p>#import <commoncrypto commondigest.h=""><br>@implementation CJMD5<br>+(NSString <em>)md5HexDigest:(NSString </em>)input{</commoncrypto></p>
+<p>const char<em> str = [input UTF8String];<br>unsigned char result[CC_MD5_DIGEST_LENGTH];<br>CC_MD5(str, strlen(str), result);<br>NSMutableString </em>ret = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH];</p>
+<p>for(int i = 0; i&lt;CC_MD5_DIGEST_LENGTH; i++) {<br>[ret appendFormat:@”%02X”,result];<br>}<br>return ret;<br>}<br>@end<br>3<br>MD5是不可逆的只有加密没有解密，iOS代码加密使用方式如下<br>NSString <em>userName = @”cerastes”;<br>NSString </em>password = @”hello Word”;<br>//   MD5加密<br>NSString <em>md5 = [CJMD5 md5HexDigest:password];<br>NSLog(@”%@”,md5);<br>END<br>AES加密iOS代码加密<br>1<br>AES加密iOS代码加密使用方法<br>//  AES加密<br>NSString </em>encryptedData = [AESCrypt encrypt:userName password:password];//加密<br>NSString *message = [AESCrypt decrypt:encryptedData password:password]; //解密<br>NSLog(@”加密结果 = %@”,encryptedData);<br>NSLog(@”解密结果 = %@”,message);<br>END<br>BASE64加密iOS代码加密<br>1<br>BASE64加密iOS代码加密添加如下方法<br>.h</p>
+<ul>
+<li>(NSString<em>)encodeBase64String:(NSString </em>)input;</li>
+<li>(NSString<em>)decodeBase64String:(NSString </em>)input;</li>
+<li>(NSString<em>)encodeBase64Data:(NSData </em>)data;</li>
+<li>(NSString<em>)decodeBase64Data:(NSData </em>)data;<br>2<br>.m</li>
+<li>(NSString<em>)encodeBase64String:(NSString </em> )input {<br>NSData <em>data = [input dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];<br>data = [GTMBase64 encodeData:data];<br>NSString </em>base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];<br>return base64String;<br>}</li>
+<li>(NSString<em>)decodeBase64String:(NSString </em> )input {<br>NSData <em>data = [input dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];<br>data = [GTMBase64 decodeData:data];<br>NSString </em>base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];<br>return base64String;<br>}</li>
+<li>(NSString<em>)encodeBase64Data:(NSData </em>)data {<br>data = [GTMBase64 encodeData:data];<br>NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];<br>return base64String;<br>}</li>
+<li>(NSString<em>)decodeBase64Data:(NSData </em>)data {<br>data = [GTMBase64 decodeData:data];<br>NSString <em>base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];<br>return base64String;<br>}<br>3<br>BASE64加密iOS代码加密使用方法<br>//    BASE64加密<br>NSString </em>baseEncodeString = [GTMBase64 encodeBase64String:password];<br>NSString *baseDecodeString = [GTMBase64 decodeBase64String:baseEncodeString];<br>NSLog(@”baseEncodeString = %@”,baseEncodeString);<br>NSLog(@”baseDecodeString = %@”,baseDecodeString);<br>END<br>iOS应用代码加密<br>1<br>除了以上的三种算法的iOS代码加密之外，iOS应用代码加密也是非常重要的，这里就不贴代码了，主要的iOS代码加密方式如下，iOS应用代码加密是 爱 加 密 平台提供的专业的iOS加密服务。<br>iOS代码加密常用加密方式<br>2<br>1）本地数据加密<br>对NSUserDefaults，sqlite存储文件数据加密，保护帐号和关键信息。<br>2）URL编码加密<br>对程序中出现的URL进行编码加密，防止URL被静态分析<br>3）网络传输数据加密<br>对客户端传输数据提供加密方案，有效防止通过网络接口的拦截获取<br>4）方法体，方法名高级混淆<br>对应用程序的方法名和方法体进行混淆，保证源码被逆向后无法解析代码<br>5）程序结构混排加密<br>对应用程序逻辑结构进行打乱混排，保证源码可读性降到最低</li>
+</ul>
+<p></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2015/11/17/ios-加密方式/">
+    <time datetime="2015-11-17T04:47:35.000Z" class="entry-date">
+        2015-11-17
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-ios-Runtime机制" class="post-ios-Runtime机制 post type-post status-publish format-standard hentry">
     <!---->
 
@@ -273,7 +336,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2015/06/23/ios-Runtime机制/" data-id="cipgebsbf0000i5s6eqgsv9yp" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2015/06/23/ios-Runtime机制/" data-id="cipj9apps0008ens61f0gj5p7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -760,7 +823,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2015/06/16/ios页面跳转机制/" data-id="cipgebseh0006i5s6i38v7c3w" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2015/06/16/ios页面跳转机制/" data-id="cipj9appl0006ens66djifja9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -822,7 +885,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2014/07/15/nonatomic、-synthesize、-property、-dynamic/" data-id="cipgebsej0007i5s6b8c12ry2" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2014/07/15/nonatomic、-synthesize、-property、-dynamic/" data-id="cipj9apj50001ens6hz617tfg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -917,6 +980,10 @@
           </li>
         
           <li>
+            <a href="/2015/11/17/ios-加密方式/">ios-加密方式</a>
+          </li>
+        
+          <li>
             <a href="/2015/06/23/ios-Runtime机制/">ios-Runtime机制</a>
           </li>
         
@@ -937,7 +1004,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </aside>
 
@@ -946,7 +1013,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/ios/" style="font-size: 20px;">ios</a>
+      <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a>
     </div>
   </aside>
 
